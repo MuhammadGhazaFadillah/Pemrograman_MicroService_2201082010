@@ -6,7 +6,9 @@ package com.ghaza.product.service;
 
 import com.ghaza.product.entity.Product;
 import com.ghaza.product.repository.ProductRepository;
+import jakarta.transaction.Transactional;
 import java.util.List;
+import java.util.Objects;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,8 +26,41 @@ public class ProductService {
         return productRepository.findAll();
     }
     
+    public Product getProductById(Long Id){
+        return productRepository.findById(Id).get();
+    }
+    
     public void insert(Product product){
         productRepository.save(product);
                
     }
+    
+    @Transactional
+    public void update (Long Id, String kode, String nama, String satuan, Double harga){
+        Product product = productRepository.findById(Id)
+                .orElseThrow(() -> new IllegalStateException("Product Tidak Ada"));
+        if(kode != null && kode.length()>0
+                && !Objects.equals(product.getKode(),kode)){
+            product.setKode(kode);
+        }
+        
+        if(nama != null && nama.length()>0
+                && !Objects.equals(product.getNama(),nama)){
+            product.setNama(nama);
+        }
+        
+        if(satuan != null && satuan.length()>0
+                && !Objects.equals(product.getSatuan(),satuan)){
+            product.setSatuan(satuan);
+        }
+        
+        if(harga != null 
+                && !Objects.equals(product.getHarga(),harga)){
+            product.setHarga(harga);
+        }
+    }
+    
+    public void delete(Long Id){
+        productRepository.deleteById(Id); 
+    }  
 }
