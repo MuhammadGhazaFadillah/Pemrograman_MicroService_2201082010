@@ -26,8 +26,8 @@ public class ProductService {
         return productRepository.findAll();
     }
     
-    public Product getProductById(Long Id){
-        return productRepository.findById(Id).get();
+    public Product getProductById(Long id){
+        return productRepository.findById(id).get();
     }
     
     public void insert(Product product){
@@ -36,8 +36,8 @@ public class ProductService {
     }
     
     @Transactional
-    public void update (Long Id, String kode, String nama, String satuan, Double harga){
-        Product product = productRepository.findById(Id)
+    public void update (Long id, String kode, String nama, String satuan, Double harga){
+        Product product = productRepository.findById(id)
                 .orElseThrow(() -> new IllegalStateException("Product Tidak Ada"));
         if(kode != null && kode.length()>0
                 && !Objects.equals(product.getKode(),kode)){

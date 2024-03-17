@@ -39,22 +39,22 @@ public class ProductController {
         productService.insert(product);
     }
     
-    @DeleteMapping(path = "{Id}")
-    public void delete(@PathVariable("Id") Long Id){
+    @DeleteMapping(path = "{id}")
+    public void delete(@PathVariable("id") Long Id){
         productService.delete(Id);
     }
     
-    @PutMapping(path = "{Id}")
-    public void update (@PathVariable("Id") Long Id,
+    @PutMapping(path = "{id}")
+    public void update (@PathVariable("id") Long id,
         @RequestParam(required = false) String kode,
         @RequestParam(required = false) String nama,
         @RequestParam(required = false) String satuan,
         @RequestParam(required = false) double harga) {
-        productService.update(Id, kode, nama, satuan, harga);
+        productService.update(id, kode, nama, satuan, harga);
     }
     
-    @GetMapping(path = "{Id}")
-    public Product getProductById(@PathVariable("Id") Long Id){
-        return productService.getProductById(Id);
+    @GetMapping(path = "{id}")
+    public Product getProductById(@PathVariable("id") Long id){
+        return productService.getProductById(id);
     }
 }

@@ -6,11 +6,14 @@ package com.ghaza.order.service;
 
 import com.ghaza.order.entity.Order;
 import com.ghaza.order.repository.OrderRepository;
+import com.ghaza.order.vo.Product;
+import com.ghaza.order.vo.Responses;
 import jakarta.transaction.Transactional;
 import java.util.List;
 import java.util.Objects;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 
 /**
  *
@@ -20,6 +23,9 @@ import org.springframework.stereotype.Service;
 public class OrderService {
     @Autowired
     private OrderRepository orderRepository;
+    
+    @Autowired
+    private RestTemplate restTemplate;
     
     public List<Order> getAll(){
         return orderRepository.findAll();
@@ -34,12 +40,13 @@ public class OrderService {
     }
     
     @Transactional
-    public void update(Long id, Long produkId, Integer jumlah, String tanggal, String status, double total){
+    public void update(Long id,  String jumlah, String tanggal, String status){
         Order order = orderRepository.findById(id)
                 .orElseThrow(
                         () -> new IllegalStateException("Produk tidak ada")
                 );
-         if (jumlah != null) {
+         if (jumlah != null && jumlah.length()>0
+                 && !Objects.equals(order.getJumlah(), tanggal)) {
             order.setJumlah(jumlah);
         }
 
@@ -56,8 +63,14 @@ public class OrderService {
         orderRepository.deleteById(id);
     }
 
-    public void update(Long id, String jumlah, String tanggal, String satuan) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
+   public Responses getOrderWithProductById(Long id){
+       Responses responses = new Responses();
+       Order order = getOrderById(id);
+       Product product = restTemplate.getForObject("http://localhost:9002/api/v1/product"
+               +order.getProdukId(), Product.class);
+       responses.setOrder(order);
+       responses.setProduct(product);
+       return responses;
+   }
 }
 

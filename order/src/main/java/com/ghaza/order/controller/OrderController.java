@@ -6,6 +6,7 @@ package com.ghaza.order.controller;
 
 import com.ghaza.order.entity.Order;
 import com.ghaza.order.service.OrderService;
+import com.ghaza.order.vo.Responses;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -47,14 +48,13 @@ public class OrderController {
     public void update(@PathVariable("id")Long id,
             @RequestParam(required =false) String jumlah,
             @RequestParam(required =false) String tanggal,
-            @RequestParam(required =false) String satuan)
-           
+            @RequestParam(required =false) String status)
     {
-        orderService.update(id, jumlah, tanggal, satuan);
+        orderService.update(id, Integer.SIZE, tanggal, status);
     }
 
-    @GetMapping(path ="{Id}")
-    public Order getOrderById(@PathVariable("Id")Long Id){
-    return orderService.getOrderById(Id);
+    @GetMapping(path ="{/product/id}")
+    public Responses getOrderWithProductById(@PathVariable("id")Long id){
+    return orderService.getOrderWithProductById(id);
     }
 }

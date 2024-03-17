@@ -1,0 +1,40 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+package com.ghaza.order.vo;
+
+import com.ghaza.order.entity.Order;
+
+/**
+ *
+ * @author muham
+ */
+public class Responses {
+    Order order;
+    Product product;
+    
+    public Responses(){
+    }
+    
+    public Responses(Order order, Product product){
+        this.order = order;
+        this.product = product;
+    }
+    
+    public Order getOrder(){
+        return order;
+    }
+    
+    public Product getProduct(){
+        return product;
+    }
+
+    public void setOrder(Order order) {
+        this.order = order;
+    }
+
+    public void setProduct(Product product) {
+        this.product = product;
+    }
+}
