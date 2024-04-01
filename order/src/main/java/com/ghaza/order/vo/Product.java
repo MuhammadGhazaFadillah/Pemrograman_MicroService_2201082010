@@ -13,19 +13,17 @@ public class Product {
    
     private Long id;
     private String kode;
-    private String nama;
-    private String satuan;
-    private double harga;
+    private long harga;
+    private long stok;
     
     public Product(){
     }
-    
-    public Product(Long id, String kode,String nama, String satuan, double harga){
+
+    public Product(Long id, String kode, long harga, long stok) {
         this.id = id;
         this.kode = kode;
-        this.nama = nama;
-        this.satuan = satuan;
         this.harga = harga;
+        this.stok = stok;
     }
 
     public Long getId() {
@@ -44,28 +42,25 @@ public class Product {
         this.kode = kode;
     }
 
-    public String getNama() {
-        return nama;
-    }
-
-    public void setNama(String nama) {
-        this.nama = nama;
-    }
-
-    public String getSatuan() {
-        return satuan;
-    }
-
-    public void setSatuan(String satuan) {
-        this.satuan = satuan;
-    }
-
-    public double getHarga() {
+    public long getHarga() {
         return harga;
     }
 
-    public void setHarga(double harga) {
+    public void setHarga(long harga) {
         this.harga = harga;
+    }
+
+    public long getStok() {
+        return stok;
+    }
+
+    public void setStok(long stok) {
+        this.stok = stok;
+    }
+    
+    @Override
+    public String toString() {
+        return super.toString();
     }
 
     

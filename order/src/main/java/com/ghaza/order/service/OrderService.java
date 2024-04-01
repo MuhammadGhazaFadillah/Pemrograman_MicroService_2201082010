@@ -7,8 +7,9 @@ package com.ghaza.order.service;
 import com.ghaza.order.entity.Order;
 import com.ghaza.order.repository.OrderRepository;
 import com.ghaza.order.vo.Product;
-import com.ghaza.order.vo.Responses;
+import com.ghaza.order.vo.ResponseTemplate;
 import jakarta.transaction.Transactional;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,22 +32,17 @@ public class OrderService {
         return orderRepository.findAll();
     }
     
-    public Order getOrderById(long id){
-        return orderRepository.getReferenceById(id);
-    }
-    
     public void insert(Order order){
         orderRepository.save(order);
     }
     
     @Transactional
-    public void update(Long id,  String jumlah, String tanggal, String status){
-        Order order = orderRepository.findById(id)
+    public void update(Long orderId,  Integer jumlah, String tanggal, String status){
+        Order order = orderRepository.findById(orderId)
                 .orElseThrow(
                         () -> new IllegalStateException("Produk tidak ada")
                 );
-         if (jumlah != null && jumlah.length()>0
-                 && !Objects.equals(order.getJumlah(), tanggal)) {
+         if (jumlah != null) {
             order.setJumlah(jumlah);
         }
 
@@ -59,18 +55,25 @@ public class OrderService {
             order.setStatus(status);
         }       
    }
-   public void delete(Long id){
-        orderRepository.deleteById(id);
+   
+   public Order getOrderById(Long id){
+       return orderRepository.findById(id).get();
+   }
+   
+   public List<ResponseTemplate> getOrderWithProdukById(Long id){
+        List<ResponseTemplate> responseList = new ArrayList<>();
+        Order order = getOrderById(id);
+        Product product = restTemplate.getForObject("http://localhost:9001/api/v1/produk/"
+                + order.getProdukId(), Product.class);
+        ResponseTemplate vo = new ResponseTemplate();
+        vo.setOrder(order);
+        vo.setProduk(product);
+        responseList.add(vo);
+        return responseList;
     }
 
-   public Responses getOrderWithProductById(Long id){
-       Responses responses = new Responses();
-       Order order = getOrderById(id);
-       Product product = restTemplate.getForObject("http://localhost:9002/api/v1/product"
-               +order.getProdukId(), Product.class);
-       responses.setOrder(order);
-       responses.setProduct(product);
-       return responses;
-   }
+
+   
+    
 }
 

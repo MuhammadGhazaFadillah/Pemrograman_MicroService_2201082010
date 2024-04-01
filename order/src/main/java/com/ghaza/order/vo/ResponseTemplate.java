@@ -5,36 +5,43 @@
 package com.ghaza.order.vo;
 
 import com.ghaza.order.entity.Order;
-
 /**
  *
  * @author muham
  */
-public class Responses {
+public class ResponseTemplate {
     Order order;
     Product product;
     
-    public Responses(){
+    public ResponseTemplate() {
     }
-    
-    public Responses(Order order, Product product){
+
+    public ResponseTemplate(Order order, Product product) {
         this.order = order;
         this.product = product;
     }
-    
-    public Order getOrder(){
+
+    public Order getOrder() {
         return order;
-    }
-    
-    public Product getProduct(){
-        return product;
     }
 
     public void setOrder(Order order) {
         this.order = order;
     }
 
-    public void setProduct(Product product) {
+    public Product getProduk() {
+        return product;
+    }
+
+    public void setProduk(Product product) {
         this.product = product;
     }
+
+    @Override
+    public String toString() {
+        return "ResponseTemplate{" + "order=" + order + ", product=" + product + '}';
+    }
+    
+    
+
 }

@@ -21,7 +21,7 @@ public class Order {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private Long produkId;
-    private String jumlah;
+    private Integer jumlah;
     private String tanggal;
     private String status;
     private double total;
@@ -29,7 +29,7 @@ public class Order {
     public Order(){
     }
     
-    public Order(Long id, Long produkId, String jumlah, String tanggal, String status, double total){
+    public Order(Long id, Long produkId, Integer jumlah, String tanggal, String status, double total){
         this.id = id;
         this.produkId = produkId;
         this.jumlah = jumlah;
@@ -54,11 +54,11 @@ public class Order {
         this.produkId = produkId;
     }
 
-    public String getJumlah() {
+    public Integer getJumlah() {
         return jumlah;
     }
 
-    public void setJumlah(String jumlah) {
+    public void setJumlah(Integer jumlah) {
         this.jumlah = jumlah;
     }
 
