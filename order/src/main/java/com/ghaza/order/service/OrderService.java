@@ -63,7 +63,7 @@ public class OrderService {
    public List<ResponseTemplate> getOrderWithProdukById(Long id){
         List<ResponseTemplate> responseList = new ArrayList<>();
         Order order = getOrderById(id);
-        Product product = restTemplate.getForObject("http://localhost:9001/api/v1/produk/"
+        Product product = restTemplate.getForObject("http://localhost:9001/api/v1/product/"
                 + order.getProdukId(), Product.class);
         ResponseTemplate vo = new ResponseTemplate();
         vo.setOrder(order);

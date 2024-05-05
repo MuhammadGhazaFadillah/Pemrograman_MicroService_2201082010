@@ -36,7 +36,7 @@ public class ProductService {
     }
     
     @Transactional
-    public void update (Long id, String kode, String nama, String satuan, Double harga){
+    public void update (Long id, String kode, String nama, String stok, Double harga){
         Product product = productRepository.findById(id)
                 .orElseThrow(() -> new IllegalStateException("Product Tidak Ada"));
         if(kode != null && kode.length()>0
@@ -49,9 +49,9 @@ public class ProductService {
             product.setNama(nama);
         }
         
-        if(satuan != null && satuan.length()>0
-                && !Objects.equals(product.getSatuan(),satuan)){
-            product.setSatuan(satuan);
+        if(stok != null && stok.length()>0
+                && !Objects.equals(product.getStok(),stok)){
+            product.setStok(stok);
         }
         
         if(harga != null 

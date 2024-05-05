@@ -48,9 +48,9 @@ public class ProductController {
     public void update (@PathVariable("id") Long id,
         @RequestParam(required = false) String kode,
         @RequestParam(required = false) String nama,
-        @RequestParam(required = false) String satuan,
+        @RequestParam(required = false) String stok,
         @RequestParam(required = false) double harga) {
-        productService.update(id, kode, nama, satuan, harga);
+        productService.update(id, kode, nama, stok, harga);
     }
     
     @GetMapping(path = "{id}")

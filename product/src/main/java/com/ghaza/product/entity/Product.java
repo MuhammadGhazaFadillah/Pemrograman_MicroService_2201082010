@@ -22,17 +22,17 @@ public class Product {
     private Long id;
     private String kode;
     private String nama;
-    private String satuan;
+    private String stok;
     private double harga;
     
     public Product(){
     }
     
-    public Product(Long id, String kode,String nama, String satuan, double harga){
+    public Product(Long id, String kode,String nama, String stok, double harga){
         this.id = id;
         this.kode = kode;
         this.nama = nama;
-        this.satuan = satuan;
+        this.stok = stok;
         this.harga = harga;
     }
 
@@ -60,12 +60,12 @@ public class Product {
         this.nama = nama;
     }
 
-    public String getSatuan() {
-        return satuan;
+    public String getStok() {
+        return stok;
     }
 
-    public void setSatuan(String satuan) {
-        this.satuan = satuan;
+    public void setStok(String stok) {
+        this.stok = stok;
     }
 
     public double getHarga() {

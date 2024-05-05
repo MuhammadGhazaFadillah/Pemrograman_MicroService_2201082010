@@ -1,12 +1,10 @@
-package com.ghaza.product;
+package com.ghaza.serviceregistry;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
-
 @SpringBootTest
-
-class ProductApplicationTests {
+class ServiceRegistryApplicationTests {
 
 	@Test
 	void contextLoads() {
