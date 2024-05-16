@@ -36,6 +36,11 @@ public class OrderController {
         
     }
     
+    @PostMapping
+    public void insert (@RequestBody Order order){
+        orderService.insert(order);
+    }
+    
     @GetMapping(path="{id}")
     public Order getOrderById(@PathVariable("id")Long id){
         return orderService.getOrderById(id);
@@ -53,6 +58,11 @@ public class OrderController {
             @RequestParam(required = false) String status
     ) {
         orderService.update(id, jumlah, tanggal, status);
+    }
+    
+    @DeleteMapping(path = "{id}")
+    public void delete(@PathVariable("id") Long Id){
+        orderService.delete(Id);
     }
 
 }
